@@ -44,6 +44,17 @@ uv run jupyter lite build --contents content --output-dir dist
 python3 -m http.server -d dist 8000   # poi apri http://localhost:8000/lab
 ```
 
+## Se una modifica alla config non si applica
+
+JupyterLite tiene una cache di build (`.jupyterlite.doit.db`). Se cambi `jupyter-lite.json` o `overrides.json` e non vedi l'effetto in locale, cancella cache e output e ribuilda:
+
+```bash
+rm -rf dist .jupyterlite.doit.db
+uv run jupyter lite build --contents content --output-dir dist
+```
+
+(In CI il problema non si pone: ogni run parte da un checkout pulito.)
+
 ## Note utili
 
 - La cartella `solutions/` è nel repository ma **non** viene pubblicata sul sito
@@ -54,3 +65,11 @@ python3 -m http.server -d dist 8000   # poi apri http://localhost:8000/lab
   (`source_hidden`): lo studente la esegue e vede solo il risultato. È un
   accorgimento visivo, non una protezione: chi vuole può sempre espanderla.
 - Stato dei deploy: <https://github.com/ulivs-app/python-tutorial/actions>
+
+## Tema e branding
+
+- **Tema:** impostato in `overrides.json` con `@jupyterlab/apputils-extension:themes` → `theme`. Default `"JupyterLab Night"` (scuro). Altri valori: `"JupyterLab Dark"`, `"JupyterLab Light"`. Il tema `jupyterlab-night` è installato via `requirements.txt`.
+- **Nome app, favicon, rimozione logo Jupyter:** in `jupyter-lite.json` (`appName`, `faviconUrl`, `disabledExtensions`).
+- **Favicon e logo:** `content/favicon.svg` (servita dal sito, finisce in `dist/files/favicon.svg`) e `docs/logo.svg` (logo completo, solo nel repo), ripresi dal sito Open Innova.
+- Tutto è guidato da file versionati: sopravvive ai rebuild della CI, nessuna modifica manuale a `dist/`.
+- Nota: il logo immagine in alto a sinistra non è sostituibile via sola configurazione (servirebbe una piccola estensione JupyterLab); per questo l'header mostra il nome testuale + favicon.

@@ -45,6 +45,8 @@ uv run python tools/build_notebooks.py
 
 Puoi anche editare i `.ipynb` a mano, ma ricordati di tenere allineate le due versioni (studente e `_SOL`).
 
+**Aspetto e branding.** Il sito usa il tema scuro **JupyterLab Night** e i colori/favicon di Open Innova. Per cambiare tema, modifica `overrides.json` → chiave `theme` (valori validi: `"JupyterLab Night"`, `"JupyterLab Dark"`, `"JupyterLab Light"`). Il nome dell'app e la favicon sono in `jupyter-lite.json` (`appName`, `faviconUrl`); la favicon è [content/favicon.svg](content/favicon.svg) (servita dal sito), il logo completo è [docs/logo.svg](docs/logo.svg) (solo nel repo). Dopo ogni modifica ricorda di ribuildare.
+
 **Provare in locale prima di pubblicare.**
 
 ```bash

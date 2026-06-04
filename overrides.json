@@ -3,5 +3,8 @@
     "defaultViewers": {
       "markdown": "Markdown Preview"
     }
+  },
+  "@jupyterlab/apputils-extension:themes": {
+    "theme": "JupyterLab Night"
   }
 }
