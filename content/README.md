@@ -14,7 +14,9 @@ Ogni esercizio ha questa forma:
 
 1. Un commento con l'**enunciato** e un esempio.
 2. Una funzione (o una classe) con dentro `pass  # <- scrivi qui la tua soluzione`. **Cancella il `pass` e scrivi il tuo codice.**
-3. Un blocco di **TEST** già pronto: **non modificarlo**. Serve a controllare se la tua soluzione è corretta.
+3. Subito sotto, una **cella di test collassata** (vedi i tre puntini `...`): non devi leggerla né modificarla, eseguila e basta (Shift + Invio). Ti mostra solo il risultato. Se sei curioso, puoi espanderla cliccando sui tre puntini.
+
+> **Ordine delle celle:** prima esegui la cella della funzione (dove hai scritto il codice), poi quella del test sotto.
 
 Quando esegui la cella, il test stampa uno di questi messaggi:
 

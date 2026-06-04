@@ -81,17 +81,38 @@ def ex(n, titolo, enunciato, sol, test, stu=None, sfida=False):
 
 # --- Costruzione dei notebook ------------------------------------------------
 
-def _exercise_source(item, use_solution):
+# Metadati che fanno apparire la cella con l'input "collassato" (input nascosto)
+# nell'interfaccia JupyterLab/JupyterLite: la cella si esegue e mostra l'output,
+# ma il codice del test resta fuori dalla vista normale dello studente.
+HIDDEN_META = {"jupyter": {"source_hidden": True}}
+
+
+def _func_source(item, use_solution):
+    """Cella VISIBILE con l'enunciato e la funzione/classe da completare."""
     body = item["sol"] if use_solution else item["stu"]
-    return "\n".join(item["header"] + [""] + body + test_block(item["test"]))
+    return "\n".join(item["header"] + [""] + body)
 
 
-def _cell(block, use_solution):
+def _test_source(item):
+    """Cella col solo blocco di test (senza la riga vuota iniziale)."""
+    return "\n".join(test_block(item["test"])).lstrip("\n")
+
+
+def _cells_for(block, use_solution):
+    """Restituisce la lista di celle per un blocco.
+
+    Un esercizio genera DUE celle: la funzione (visibile) e il test. Nella
+    versione studente la cella del test e' collassata (source_hidden); nella
+    versione soluzione resta visibile, cosi' il docente legge i casi testati.
+    """
     if block["kind"] == "md":
-        return new_markdown_cell(block["text"])
+        return [new_markdown_cell(block["text"])]
     if block["kind"] == "code":
-        return new_code_cell(block["src"])
-    return new_code_cell(_exercise_source(block, use_solution))
+        return [new_code_cell(block["src"])]
+    func_cell = new_code_cell(_func_source(block, use_solution))
+    metadata = {} if use_solution else dict(HIDDEN_META)
+    test_cell = new_code_cell(_test_source(block), metadata=metadata)
+    return [func_cell, test_cell]
 
 
 CREDITO = md(
@@ -108,7 +129,10 @@ def write_pair(slug, blocks):
         (False, CONTENT_DIR, ""),
         (True, SOLUTIONS_DIR, "_SOL"),
     ]:
-        nb = new_notebook(cells=[_cell(b, use_solution) for b in blocks])
+        cells = []
+        for b in blocks:
+            cells.extend(_cells_for(b, use_solution))
+        nb = new_notebook(cells=cells)
         nb.metadata = KERNEL_META
         os.makedirs(folder, exist_ok=True)
         path = os.path.join(folder, f"{slug}{suffix}.ipynb")

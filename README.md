@@ -27,6 +27,8 @@ GitHub Pages serve un sito statico generato da [JupyterLite](https://jupyterlite
 
 ## Per i docenti
 
+> Guida operativa completa (rigenerare, verificare, pubblicare): [docs/MANUTENZIONE.md](docs/MANUTENZIONE.md).
+
 **Dove stanno le soluzioni.** La cartella `solutions/` contiene le versioni complete (`*_SOL.ipynb`) con tutte le funzioni già risolte. Questa cartella **non viene pubblicata**: il build di JupyterLite include solo `content/`, e `jupyter_lite_config.json` la esclude esplicitamente come ulteriore garanzia. Gli studenti non possono vederla dal sito.
 
 **Come modificare i notebook.** I notebook (sia studente che soluzione) sono generati da un unico script, `tools/build_notebooks.py`, che definisce ogni esercizio una sola volta (enunciato + soluzione + test) ed emette automaticamente le due versioni allineate. Per modificare un esercizio, cambia il contenuto nello script e rigenera:
