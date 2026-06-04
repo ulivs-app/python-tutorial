@@ -1,0 +1,18 @@
+# Build JupyterLite
+dist/
+_output/
+.jupyterlite.doit.db
+
+# Ambiente Python locale (uv / venv)
+.venv/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+
+# Istruzioni interne (non pubblicare)
+CLAUDE.md

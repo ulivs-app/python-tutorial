@@ -1,0 +1,5 @@
+{
+  "LiteBuildConfig": {
+    "extra_ignore_contents": ["solutions/", "_SOL"]
+  }
+}
