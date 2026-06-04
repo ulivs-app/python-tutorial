@@ -68,6 +68,17 @@ Materiale a cura di **Open Innova S.R.L.** ([openinnova.it](https://www.openinno
 
 Sei libero di riusarlo, modificarlo e ridistribuirlo, anche per fini commerciali, **a patto di citare la fonte**. Vedi il file [LICENSE](LICENSE) per i dettagli e per il testo di attribuzione consigliato.
 
+### Crediti e licenze di terze parti
+
+Il sito è costruito su strumenti open source, che ringraziamo:
+
+- **[JupyterLite](https://jupyterlite.readthedocs.io)** — Python nel browser senza server (BSD-3-Clause)
+- **[Pyodide](https://pyodide.org)** — CPython compilato in WebAssembly (MPL-2.0), caricato a runtime dalla CDN [jsDelivr](https://www.jsdelivr.com/)
+- **[JupyterLab](https://jupyterlab.readthedocs.io)** e **[Jupyter Notebook](https://jupyter.org)** — interfaccia (BSD-3-Clause)
+- **[Python](https://www.python.org)** (PSF License)
+
+Le note di licenza complete delle dipendenze sono incluse nel sito generato (file `third-party-licenses.json`) e consultabili dentro l'app dal menu **Help → Licenses**. Questi strumenti sono solo *usati*, non ridistribuiti da noi (Pyodide e CPython arrivano dalla CDN): nessun obbligo di attribuzione aggiuntivo, le citazioni qui sopra sono un riconoscimento dovuto.
+
 ## Setup iniziale di GitHub Pages (una volta sola)
 
 1. Crea un repository su GitHub e fai push di questo codice.
