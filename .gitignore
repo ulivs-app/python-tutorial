@@ -13,6 +13,3 @@ __pycache__/
 
 # Sistema
 .DS_Store
-
-# Istruzioni interne (non pubblicare)
-CLAUDE.md
