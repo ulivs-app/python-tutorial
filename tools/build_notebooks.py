@@ -10,6 +10,7 @@ Uso:
 """
 
 import os
+import base64
 import nbformat as nbf
 from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
 
@@ -17,6 +18,11 @@ from nbformat.v4 import new_notebook, new_markdown_cell, new_code_cell
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT_DIR = os.path.join(ROOT, "content")
 SOLUTIONS_DIR = os.path.join(ROOT, "solutions")
+BRANDING_DIR = os.path.join(ROOT, "branding")
+
+# Colori del brand Open Innova.
+BRAND_NAVY = "#19213c"
+BRAND_GREEN = "#6bb889"
 
 STUDENT_BODY = "    pass  # <- scrivi qui la tua soluzione"
 
@@ -123,8 +129,32 @@ CREDITO = md(
 )
 
 
+def brand_banner():
+    """Banner brandizzato Open Innova (cella markdown) inserito in cima a ogni
+    notebook. Il logo bianco viene incorporato come data-URI (resa isolata,
+    robusta rispetto al sanitizer del markdown). Se l'immagine non venisse resa,
+    restano comunque sfondo navy + testo via attributi `style`."""
+    with open(os.path.join(BRANDING_DIR, "logo-white.svg"), "rb") as f:
+        b64 = base64.b64encode(f.read()).decode("ascii")
+    logo = f'data:image/svg+xml;base64,{b64}'
+    html = (
+        f'<div style="background:{BRAND_NAVY};border-left:6px solid {BRAND_GREEN};'
+        'border-radius:8px;padding:16px 20px;display:flex;align-items:center;'
+        'gap:18px;color:#ffffff;font-family:sans-serif;">'
+        f'<img src="{logo}" alt="Open Innova" style="height:48px;width:auto;" />'
+        '<div>'
+        f'<div style="font-size:1.35em;font-weight:700;color:#ffffff;">Bootcamp Python</div>'
+        f'<div style="font-size:0.95em;color:{BRAND_GREEN};">Open Innova &middot; impara a programmare nel browser</div>'
+        '</div></div>'
+    )
+    return md(html)
+
+
+BANNER = brand_banner()
+
+
 def write_pair(slug, blocks):
-    blocks = list(blocks) + [CREDITO]
+    blocks = [BANNER] + list(blocks) + [CREDITO]
     for use_solution, folder, suffix in [
         (False, CONTENT_DIR, ""),
         (True, SOLUTIONS_DIR, "_SOL"),

@@ -70,6 +70,7 @@ uv run jupyter lite build --contents content --output-dir dist
 
 - **Tema:** impostato in `overrides.json` con `@jupyterlab/apputils-extension:themes` → `theme`. Default `"JupyterLab Night"` (scuro). Altri valori: `"JupyterLab Dark"`, `"JupyterLab Light"`. Il tema `jupyterlab-night` è installato via `requirements.txt`.
 - **Nome app, favicon, rimozione logo Jupyter:** in `jupyter-lite.json` (`appName`, `faviconUrl`, `disabledExtensions`).
-- **Favicon e logo:** `content/favicon.svg` (servita dal sito, finisce in `dist/files/favicon.svg`) e `docs/logo.svg` (logo completo, solo nel repo), ripresi dal sito Open Innova.
+- **Banner brandizzato:** generato da `tools/build_notebooks.py` (funzione `brand_banner`), in cima a ogni notebook e alla pagina di benvenuto; usa i colori navy `#19213c` / verde `#6bb889` e il logo `branding/logo-white.svg` incorporato come data-URI (così non serve un file immagine servito).
+- **Favicon e logo:** stanno in `branding/` (`favicon.svg`, `logo-white.svg`), **fuori** da `content/` per non comparire nel file browser. La favicon viene copiata nella radice del sito (`dist/favicon.svg`) da un passo post-build del workflow; `faviconUrl` in `jupyter-lite.json` punta a `./favicon.svg`. Per un build locale, dopo `jupyter lite build` esegui: `cp branding/favicon.svg dist/favicon.svg`.
 - Tutto è guidato da file versionati: sopravvive ai rebuild della CI, nessuna modifica manuale a `dist/`.
 - Nota: il logo immagine in alto a sinistra non è sostituibile via sola configurazione (servirebbe una piccola estensione JupyterLab); per questo l'header mostra il nome testuale + favicon.
