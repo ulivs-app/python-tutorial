@@ -4,8 +4,8 @@ Tre Jupyter notebook in italiano per imparare Python **direttamente nel browser*
 
 ## Link al sito
 
-> **https://USERNAME.github.io/NOME-REPO**
-> *(sostituisci `USERNAME` e `NOME-REPO` con i valori reali del tuo repository GitHub)*
+> **https://ulivs-app.github.io/python-tutorial/**
+> *(disponibile dopo il primo deploy di GitHub Pages)*
 
 Cliccando il link si apre JupyterLite: gli esercizi girano nel browser tramite Pyodide (Python compilato in WebAssembly).
 
