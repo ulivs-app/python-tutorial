@@ -29,6 +29,10 @@ Tutto gira **nel browser dello studente**, senza server e senza installazioni: i
 
 GitHub Pages serve un sito statico generato da [JupyterLite](https://jupyterlite.readthedocs.io). Ad ogni `push` sul branch `main`, GitHub Actions ricostruisce e ripubblica il sito automaticamente.
 
+## Per gli studenti
+
+Apri il link al sito qui sopra, scegli il notebook del giorno e segui le istruzioni nella pagina di benvenuto. **Non serve installare niente.**
+
 ## Per i docenti
 
 > Guida operativa completa (rigenerare, verificare, pubblicare): [docs/MANUTENZIONE.md](docs/MANUTENZIONE.md).
@@ -68,10 +72,6 @@ python -m http.server -d dist 8000   # poi apri http://localhost:8000
 ```bash
 git add -A && git commit -m "aggiorna esercizi" && git push
 ```
-
-## Per gli studenti
-
-Apri il link al sito qui sopra, scegli il notebook del giorno e segui le istruzioni nella pagina di benvenuto. **Non serve installare niente.**
 
 ## Licenza
 

@@ -38,6 +38,6 @@ Una o due volte per notebook trovi un esercizio marcato con `[SFIDA]`: è un po'
 
 ## Un consiglio
 
-Le soluzioni esistono, ma **non sono qui** e il tuo docente preferisce che tu provi prima da solo. Sbagliare e riprovare è esattamente il modo in cui si impara a programmare. Se ti blocchi, chiedi: nessuna domanda è stupida.
+Le soluzioni esistono, ma **non sono qui** e noi preferiamo che tu provi prima da solo. Sbagliare e riprovare è esattamente il modo in cui si impara. Se ti blocchi, chiedi: nessuna domanda è stupida.
 
 Buon lavoro!
