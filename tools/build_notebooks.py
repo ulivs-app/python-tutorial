@@ -45,6 +45,11 @@ BEGIN = "### BEGIN SOLUTION"
 END = "### END SOLUTION"
 STUDENT_PLACEHOLDER = "pass  # <- scrivi qui la tua soluzione"
 
+# Pagina di benvenuto: il banner fra questi marcatori viene rigenerato dal build.
+README_PATH = os.path.join(ROOT, "content", "README.md")
+BANNER_START = "<!-- BANNER:START (rigenerato da build_notebooks.py, non modificare) -->"
+BANNER_END = "<!-- BANNER:END -->"
+
 KERNEL_META = {
     "kernelspec": {"name": "python", "display_name": "Python (Pyodide)", "language": "python"},
     "language_info": {"name": "python"},
@@ -167,8 +172,27 @@ def _write(path, cells):
         nbf.write(nb, f)
 
 
+def update_readme_banner():
+    """Rigenera il banner nella pagina di benvenuto (content/README.md), nella
+    regione fra BANNER_START e BANNER_END, usando lo stesso banner dei notebook."""
+    if not os.path.exists(README_PATH):
+        return
+    txt = open(README_PATH, encoding="utf-8").read()
+    block = f"{BANNER_START}\n{banner_text()}\n{BANNER_END}"
+    if BANNER_START in txt and BANNER_END in txt:
+        pre = txt[: txt.index(BANNER_START)]
+        post = txt[txt.index(BANNER_END) + len(BANNER_END):]
+        txt = pre + block + post
+    else:  # marcatori assenti: inserisce il banner in cima
+        txt = block + "\n\n" + txt
+    with open(README_PATH, "w", encoding="utf-8") as f:
+        f.write(txt)
+    print("  aggiornato: content/README.md (banner)")
+
+
 if __name__ == "__main__":
     print("Genero i notebook da source/ ...")
     for slug in SLUGS:
         build_one(slug)
+    update_readme_banner()
     print("Fatto.")
