@@ -35,7 +35,16 @@ GitHub Pages serve un sito statico generato da [JupyterLite](https://jupyterlite
 
 **Dove stanno le soluzioni.** La cartella `solutions/` contiene le versioni complete (`*_SOL.ipynb`) con tutte le funzioni già risolte. Questa cartella **non viene pubblicata**: il build di JupyterLite include solo `content/`, e `jupyter_lite_config.json` la esclude esplicitamente come ulteriore garanzia. Gli studenti non possono vederla dal sito.
 
-**Come modificare i notebook.** I notebook (sia studente che soluzione) sono generati da un unico script, `tools/build_notebooks.py`, che definisce ogni esercizio una sola volta (enunciato + soluzione + test) ed emette automaticamente le due versioni allineate. Per modificare un esercizio, cambia il contenuto nello script e rigenera:
+**Come modificare i notebook.** La **fonte di verità** sono i notebook in `source/` (`source/01_*.ipynb`, ecc.): li apri in JupyterLab, li **esegui** e verifichi che i test passino. Per marcare la parte di soluzione che lo studente non deve vedere, avvolgila tra i marcatori (convenzione nbgrader):
+
+```python
+def funzione(...):
+    ### BEGIN SOLUTION
+    ...codice della soluzione...
+    ### END SOLUTION
+```
+
+Lo script `tools/build_notebooks.py` legge `source/` e genera automaticamente le due versioni: `content/` (studente — i blocchi soluzione diventano `pass`, i test sono collassati) e `solutions/` (docente — soluzione visibile). Eventuali suggerimenti: scrivi un commento `# <- ...` **prima** di `### BEGIN SOLUTION` (resta visibile allo studente). Per un nuovo esercizio servono due celle: la cella con la funzione (marcata) e una cella di **TEST** la cui prima riga è `# [TEST] (non modificare)`.
 
 ```bash
 uv venv

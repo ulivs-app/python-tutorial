@@ -16,9 +16,24 @@ notebook in locale; non fanno parte di quello che gira nel browser.
 
 ## Flusso di aggiornamento
 
-Gli esercizi si modificano **in un solo posto**: `tools/build_notebooks.py`.
-Lì ogni esercizio è definito una volta (enunciato, soluzione, test). Dopo aver
-modificato lo script, rigenera, verifica e pubblica:
+Gli esercizi si modificano **in un solo posto**: i notebook-sorgente in `source/`
+(`source/01_*.ipynb`, ...). Aprili in JupyterLab, modificali ed **eseguili** per
+verificare che i test passino. La parte di soluzione da nascondere allo studente
+va avvolta nei marcatori (convenzione nbgrader):
+
+```python
+def funzione(...):
+    ### BEGIN SOLUTION
+    ...codice della soluzione...
+    ### END SOLUTION
+```
+
+- Un **nuovo esercizio** = due celle: la cella con la funzione (marcata) + una cella
+  di **TEST** con prima riga `# [TEST] (non modificare)` e il blocco `try/except`.
+- Un **suggerimento** per lo studente: commento `# <- ...` **prima** di `### BEGIN SOLUTION`.
+- Le celle markdown e quelle di codice senza marcatori (import, esempi) vengono copiate tal quali.
+
+Dopo aver modificato `source/`, rigenera, verifica e pubblica:
 
 ```bash
 uv run python tools/build_notebooks.py && uv run python tools/verify_notebooks.py
@@ -27,9 +42,10 @@ git add -A && git commit -m "..." && git push
 
 Cosa fa ciascun passo:
 
-1. **`build_notebooks.py`** rigenera in modo allineato sia le versioni studente
-   (`content/*.ipynb`) sia le soluzioni (`solutions/*_SOL.ipynb`). Non modificare
-   i `.ipynb` a mano: verrebbero sovrascritti alla rigenerazione successiva.
+1. **`build_notebooks.py`** legge `source/` e rigenera in modo allineato le versioni
+   studente (`content/*.ipynb`, blocchi soluzione → `pass`, test collassati) e le
+   soluzioni (`solutions/*_SOL.ipynb`, marcatori rimossi). Non modificare a mano i
+   file in `content/`/`solutions/`: vengono sovrascritti. Modifica sempre `source/`.
 2. **`verify_notebooks.py`** esegue tutti i notebook e controlla i criteri di
    accettazione: nelle soluzioni ogni test stampa `[OK] Corretto!`, nelle versioni
    studente ogni test fallisce in modo pulito (`[X]` o `[!]`), senza crash.

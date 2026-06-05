@@ -62,6 +62,10 @@ def check(path, expect_solution):
 
 def main():
     targets = [
+        # i notebook-sorgente devono eseguire verdi (contengono le soluzioni)
+        ("source/01_strutture_dati_e_cicli.ipynb", True),
+        ("source/02_funzioni_e_librerie.ipynb", True),
+        ("source/03_classi.ipynb", True),
         ("solutions/01_strutture_dati_e_cicli_SOL.ipynb", True),
         ("solutions/02_funzioni_e_librerie_SOL.ipynb", True),
         ("solutions/03_classi_SOL.ipynb", True),
