@@ -8,14 +8,19 @@ on:
     branches:
       - '*'
 
+# Privilegio minimo di default: il token e' di sola lettura.
+# Il job deploy si concede esplicitamente i permessi che gli servono.
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: '3.11'
       - name: Install the dependencies
@@ -27,7 +32,7 @@ jobs:
           # favicon del brand servita dalla radice del sito (fuori dal file browser)
           cp branding/favicon.svg dist/favicon.svg
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           path: ./dist
 
@@ -46,4 +51,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5
