@@ -74,7 +74,7 @@ def banner_text():
         f'<img src="{logo}" alt="Open Innova" style="height:48px;width:auto;" />'
         '<div>'
         '<div style="font-size:1.35em;font-weight:700;color:#ffffff;">Bootcamp Python</div>'
-        f'<div style="font-size:0.95em;color:{BRAND_GREEN};">Open Innova &middot; impara a programmare nel browser</div>'
+        f'<div style="font-size:0.95em;color:{BRAND_GREEN};">Open Innova &middot; Python for beginners</div>'
         '</div></div>'
     )
 
